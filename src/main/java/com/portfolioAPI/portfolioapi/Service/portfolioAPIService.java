@@ -23,16 +23,15 @@ public class portfolioAPIService {
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> getCustomer(Long id){
-        System.out.println(id);
-        return customerRepository.findCustomerById(id);
-    }
-
-    public void addCustomer(Customer customer) {
+    public Optional<Customer> getCustomer(Customer customer){
         Optional<Customer> CustomerOptional = customerRepository.findCustomerById(customer.getId());
         if(CustomerOptional.isEmpty()){
             throw new IllegalStateException("Couldn't find ID");
         }
+        return customerRepository.findCustomerById(customer.getId());
+    }
+
+    public void addCustomer(Customer customer) {
         customerRepository.save(customer);
 
     }

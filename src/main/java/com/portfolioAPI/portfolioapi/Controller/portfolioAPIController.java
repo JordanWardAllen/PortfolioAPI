@@ -23,8 +23,7 @@ public class portfolioAPIController {
         this.customerService = customerService;
     }
 
-//    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
-    @GetMapping(path = "/getCustomers")
+    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
     public List<Customer> getCustomers(){
         logger.logger.info(String.valueOf(customerService.getCustomers()));
         return customerService.getCustomers();
@@ -33,7 +32,7 @@ public class portfolioAPIController {
     @RequestMapping(value = "/getCustomer", method = RequestMethod.GET)
     public Optional<Customer> getCustomer(@RequestBody Customer customer){
 //        logger.logger.info(customer.getName());
-        return customerService.getCustomer(customer.getId());
+        return customerService.getCustomer(customer);
     }
 
     @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
