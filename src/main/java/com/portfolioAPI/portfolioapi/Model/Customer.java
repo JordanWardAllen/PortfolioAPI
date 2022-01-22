@@ -13,7 +13,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Entity
 @Table
-public class CustomerModel {
+public class Customer {
     @Id
     @SequenceGenerator(
             name = "customer_sequence",

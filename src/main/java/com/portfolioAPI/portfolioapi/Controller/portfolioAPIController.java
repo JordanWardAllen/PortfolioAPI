@@ -1,6 +1,6 @@
 package com.portfolioAPI.portfolioapi.Controller;
 
-import com.portfolioAPI.portfolioapi.Model.CustomerModel;
+import com.portfolioAPI.portfolioapi.Model.Customer;
 import com.portfolioAPI.portfolioapi.Service.portfolioAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path="api/v1/customer")
 public class portfolioAPIController {
@@ -23,21 +25,21 @@ public class portfolioAPIController {
 
 //    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
     @GetMapping(path = "/getCustomers")
-    public List<CustomerModel> getCustomers(){
+    public List<Customer> getCustomers(){
         logger.logger.info(String.valueOf(customerService.getCustomers()));
         return customerService.getCustomers();
     }
 
     @RequestMapping(value = "/getCustomer", method = RequestMethod.GET)
-    public CustomerModel getCustomer(@RequestBody CustomerModel customer){
-        logger.logger.info(customer.getName());
+    public Optional<Customer> getCustomer(@RequestBody Customer customer){
+//        logger.logger.info(customer.getName());
         return customerService.getCustomer(customer.getId());
     }
 
     @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
     public void registerCustomer(
-            @RequestBody CustomerModel customer){
-        logger.logger.info(customer.getName());
+            @RequestBody Customer customer){
+//        logger.logger.info(customer.getName());
         customerService.addCustomer(customer);
     }
 
