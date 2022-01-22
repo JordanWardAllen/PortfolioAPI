@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Customer {
+
     @Id
     @SequenceGenerator(
             name = "customer_sequence",
