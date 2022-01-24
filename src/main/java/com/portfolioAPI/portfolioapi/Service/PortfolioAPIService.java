@@ -2,6 +2,7 @@ package com.portfolioAPI.portfolioapi.Service;
 
 import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
 import com.portfolioAPI.portfolioapi.Repository.CustomerRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 import static com.portfolioAPI.portfolioapi.Constants.ServiceConstants.NO_VALID_ID_ERROR;
 
 @Service
+@Slf4j
 public class PortfolioAPIService {
 
     private final CustomerRepository customerRepository;
@@ -25,12 +27,15 @@ public class PortfolioAPIService {
         return customerRepository.findAll();
     }
 
-    public CustomerEntity getCustomer(UUID id){
-        CustomerEntity customerEntity = customerRepository.findCustomerById(id);
-        if(customerEntity == null){
-            throw new IllegalStateException(NO_VALID_ID_ERROR);
+    public CustomerEntity getCustomer(CustomerEntity customerEntity){
+        try {
+            customerRepository.findCustomerById(customerEntity.getId());
         }
-        return customerRepository.findCustomerById(id);
+        catch (IllegalStateException e){
+            log.error(NO_VALID_ID_ERROR);
+        }
+
+        return customerRepository.findCustomerById(customerEntity.getId());
     }
 
 

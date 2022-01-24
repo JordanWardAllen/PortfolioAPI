@@ -10,15 +10,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table
+@Data
 public class CustomerEntity {
 
     @Id
-    @Column(
-            name = "id",
-            updatable = false,
-            nullable = false
-    )
     @SequenceGenerator(
             name = "customer_sequence",
             sequenceName = "customer_sequence",
@@ -28,7 +24,8 @@ public class CustomerEntity {
             strategy = GenerationType.SEQUENCE,
             generator = "customer_sequence"
     )
-    private UUID id;
+    @Column
+    private Long id;
 
     @Column(
             name = "name",

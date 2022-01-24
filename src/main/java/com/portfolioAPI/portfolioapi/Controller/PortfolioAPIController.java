@@ -1,7 +1,6 @@
 package com.portfolioAPI.portfolioapi.Controller;
 
 import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
-import com.portfolioAPI.portfolioapi.Model.Customer;
 import com.portfolioAPI.portfolioapi.Service.CustomerDetailsService;
 import com.portfolioAPI.portfolioapi.Service.PortfolioAPIService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,15 +33,15 @@ public class PortfolioAPIController {
     }
 
     @RequestMapping(value = "/getCustomer", method = RequestMethod.GET)
-    public CustomerEntity getCustomer(@RequestBody UUID id){
-        log.debug("/getCustomer endpoint hit with request body {}", id);
-        return portfolioAPIService.getCustomer(id);
+    public CustomerEntity getCustomer(@RequestBody CustomerEntity customerEntity){
+        log.debug("/getCustomer endpoint hit with request body {}", customerEntity.getId());
+        return portfolioAPIService.getCustomer(customerEntity);
     }
 
     @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
     public void registerCustomer(
-            @RequestBody Customer customer){
-        customerDetailsService.postCustomer(customer);
+            @RequestBody CustomerEntity customerEntity){
+        customerDetailsService.postCustomer(customerEntity);
     }
 
     @RequestMapping(value = "/removeCustomer", method = {RequestMethod.GET, RequestMethod.POST})

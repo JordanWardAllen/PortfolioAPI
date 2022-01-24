@@ -7,11 +7,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Data
 @Builder
 public class Customer {
 
-    private UUID id;
+    private Long id;
 
     @NonNull
     private String name;

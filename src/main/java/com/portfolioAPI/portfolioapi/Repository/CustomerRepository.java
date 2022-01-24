@@ -7,10 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> {
+public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-    CustomerEntity findCustomerById(UUID id);
+    CustomerEntity findCustomerById(Long id);
 
     CustomerEntity findCustomerByEmail(String email);
 
+    CustomerEntity findAllById(Long id);
 }
+

@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.portfolioAPI.portfolioapi.Constants.ServiceConstants.CREATE_NEW_CUSTOMER_EMAIL_ERROR;
 
 @Service
 @Slf4j
@@ -23,26 +22,20 @@ public class CustomerDetailsService {
         this.customerRepository = customerRepository;
     }
 
-    public void postCustomer(Customer customer) {
-        CustomerEntity customerEntity = addCustomer(customer);
+    public void postCustomer(CustomerEntity customerEntity) {
+        addCustomer(customerEntity);
     }
 
     // AddCustomer method seperated for future authentication control
-    public CustomerEntity addCustomer(Customer customer) {
-
+    public void addCustomer(CustomerEntity customerEntity) {
         try {
-            customerRepository.findCustomerByEmail(customer.getEmail());
+            customerRepository.findCustomerByEmail(customerEntity.getEmail());
         }
         catch (IllegalStateException e){
-            log.error("Failed to create new customer. Email {} already in use", customer.getEmail());
+            log.error("Failed to create new customer. Email {} already in use", customerEntity.getEmail());
             e.printStackTrace();
         }
-        CustomerEntity customerEntity = portfolioAPIService.getCustomer(customer.getId());
         saveCustomer(customerEntity);
-        return customerEntity;
-
-
-
 
     }
 
