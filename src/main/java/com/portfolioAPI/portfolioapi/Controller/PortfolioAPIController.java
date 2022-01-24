@@ -42,7 +42,7 @@ public class PortfolioAPIController {
     @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
     public void registerCustomer(
             @RequestBody Customer customer){
-        customerDetailsService.addCustomer(customer);
+        customerDetailsService.postCustomer(customer);
     }
 
     @RequestMapping(value = "/removeCustomer", method = {RequestMethod.GET, RequestMethod.POST})
