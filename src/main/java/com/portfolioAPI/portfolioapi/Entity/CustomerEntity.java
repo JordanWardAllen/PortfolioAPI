@@ -2,9 +2,7 @@ package com.portfolioAPI.portfolioapi.Entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -15,13 +13,42 @@ import java.util.UUID;
 @Builder
 public class CustomerEntity {
 
-    @Id @Column
+    @Id
+    @Column(
+            name = "id",
+            updatable = false,
+            nullable = false
+    )
+    @SequenceGenerator(
+            name = "customer_sequence",
+            sequenceName = "customer_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "customer_sequence"
+    )
     private UUID id;
 
-    @Column
+    @Column(
+            name = "name",
+            length = 36
+    )
+    @NonNull
     private String name;
-    @Column
+
+    @Column(
+            name = "email",
+            length = 50
+    )
+    @NonNull
     private String email;
-    @Column
+
+    //Encoding to be implemented later
+    @Column(
+            name = "password",
+            length = 16
+    )
+    @NonNull
     private String password;
 }
