@@ -1,5 +1,6 @@
 package com.portfolioAPI.portfolioapi.Service;
 
+import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
 import com.portfolioAPI.portfolioapi.Model.Customer;
 import com.portfolioAPI.portfolioapi.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.portfolioAPI.portfolioapi.Constants.ServiceConstants.NO_VALID_ID_ERROR;
 
@@ -21,16 +23,16 @@ public class PortfolioAPIService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getCustomers(){
+    public List<CustomerEntity> getCustomers(){
         return customerRepository.findAll();
     }
 
-    public Optional<Customer> getCustomer(Customer customer){
-        Optional<Customer> CustomerOptional = customerRepository.findCustomerById(customer.getId());
-        if(CustomerOptional.isEmpty()){
+    public CustomerEntity getCustomer(UUID id){
+        CustomerEntity customerEntity = customerRepository.findCustomerById(id);
+        if(customerEntity == null){
             throw new IllegalStateException(NO_VALID_ID_ERROR);
         }
-        return customerRepository.findCustomerById(customer.getId());
+        return customerRepository.findCustomerById(id);
     }
 
 

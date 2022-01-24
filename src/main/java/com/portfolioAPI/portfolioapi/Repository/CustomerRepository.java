@@ -1,16 +1,16 @@
 package com.portfolioAPI.portfolioapi.Repository;
 
-import com.portfolioAPI.portfolioapi.Model.Customer;
+import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<CustomerEntity, UUID> {
 
-    Optional<Customer> findCustomerById(Long id);
+    CustomerEntity findCustomerById(UUID id);
 
-    Optional<Customer> findCustomerByEmail(String email);
+    CustomerEntity findCustomerByEmail(String email);
 
 }

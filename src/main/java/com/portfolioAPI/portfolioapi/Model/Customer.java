@@ -4,6 +4,7 @@ import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Entity
 @Table
+@Builder
 public class Customer {
 
     @Id
@@ -26,7 +28,7 @@ public class Customer {
             generator = "customer_sequence"
     )
 
-    private long id;
+    private UUID id;
 
     @NonNull
     private String name;
