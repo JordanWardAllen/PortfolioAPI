@@ -3,7 +3,6 @@ package com.portfolioAPI.portfolioapi.Entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Getter

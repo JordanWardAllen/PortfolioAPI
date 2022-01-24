@@ -1,7 +1,6 @@
 package com.portfolioAPI.portfolioapi.Model;
 
 import lombok.*;
-import java.util.UUID;
 
 
 @NoArgsConstructor

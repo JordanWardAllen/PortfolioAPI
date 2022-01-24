@@ -1,9 +1,7 @@
 package com.portfolioAPI.portfolioapi.Service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
-import com.portfolioAPI.portfolioapi.Model.Customer;
 import com.portfolioAPI.portfolioapi.Repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ public class CustomerDetailsService {
         addCustomer(customerEntity);
     }
 
-    // AddCustomer method seperated for future authentication control
+    // AddCustomer method separated for future authentication control
     public void addCustomer(CustomerEntity customerEntity) {
         try {
             customerRepository.findCustomerByEmail(customerEntity.getEmail());
