@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,13 +18,11 @@ import java.util.UUID;
 @Slf4j
 public class PortfolioAPIController {
 
-    private final LoggingController logger;
     private final PortfolioAPIService portfolioAPIService;
     private final CustomerDetailsService customerDetailsService;
 
     @Autowired
-    public PortfolioAPIController(LoggingController logger, PortfolioAPIService portfolioAPIService, CustomerDetailsService customerDetailsService){
-        this.logger = logger;
+    public PortfolioAPIController(PortfolioAPIService portfolioAPIService, CustomerDetailsService customerDetailsService){
         this.portfolioAPIService = portfolioAPIService;
         this.customerDetailsService = customerDetailsService;
     }
@@ -39,14 +36,12 @@ public class PortfolioAPIController {
     @RequestMapping(value = "/getCustomer", method = RequestMethod.GET)
     public CustomerEntity getCustomer(@RequestBody UUID id){
         log.debug("/getCustomer endpoint hit with request body {}", id);
-//        logger.logger.info(customer.getName());
         return portfolioAPIService.getCustomer(id);
     }
 
     @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
     public void registerCustomer(
             @RequestBody Customer customer){
-//        logger.logger.info(customer.getName());
         customerDetailsService.addCustomer(customer);
     }
 

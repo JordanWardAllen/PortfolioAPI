@@ -1,14 +1,12 @@
 package com.portfolioAPI.portfolioapi.Service;
 
 import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
-import com.portfolioAPI.portfolioapi.Model.Customer;
 import com.portfolioAPI.portfolioapi.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static com.portfolioAPI.portfolioapi.Constants.ServiceConstants.NO_VALID_ID_ERROR;
