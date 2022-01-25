@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Table
-@Data
 public class CustomerEntity {
 
     @Id

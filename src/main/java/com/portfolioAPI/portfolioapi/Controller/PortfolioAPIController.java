@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/v1/customer")
+@RequestMapping(path="/api/v1/customer")
 @Slf4j
+@CrossOrigin(originPatterns = "http://localhost:4200")
 public class PortfolioAPIController {
 
     private final PortfolioAPIService portfolioAPIService;
@@ -26,7 +27,7 @@ public class PortfolioAPIController {
     }
 
     @RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomers(){
+    public Iterable<CustomerEntity> getCustomers(){
         log.debug("Get customers Endpoint hit.");
         return portfolioAPIService.getCustomers();
     }

@@ -22,7 +22,7 @@ public class PortfolioAPIService {
         this.customerRepository = customerRepository;
     }
 
-    public List<CustomerEntity> getCustomers(){
+    public Iterable<CustomerEntity> getCustomers(){
         return customerRepository.findAll();
     }
 
