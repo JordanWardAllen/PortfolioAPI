@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-public class Customer {
+public class User {
 
     private Long id;
 

@@ -1,7 +1,7 @@
 package com.portfolioAPI.portfolioapi;
 
-import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
-import com.portfolioAPI.portfolioapi.Repository.CustomerRepository;
+import com.portfolioAPI.portfolioapi.Entity.UserEntity;
+import com.portfolioAPI.portfolioapi.Repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,13 +17,13 @@ public class PortfolioApiApplication {
 	}
 
 	@Bean
-	CommandLineRunner init(CustomerRepository customerRepository) {
+	CommandLineRunner init(UserRepository userRepository) {
 		return args -> {
-			Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
-				CustomerEntity customerEntity = new CustomerEntity(name, "Email", "password");
-				customerRepository.save(customerEntity);
+			Stream.of("John").forEach(name -> {
+				UserEntity userEntity = new UserEntity(name, "Email", "password");
+				userRepository.save(userEntity);
 			});
-			customerRepository.findAll().forEach(System.out::println);
+			userRepository.findAll().forEach(System.out::println);
 		};
 	}
 

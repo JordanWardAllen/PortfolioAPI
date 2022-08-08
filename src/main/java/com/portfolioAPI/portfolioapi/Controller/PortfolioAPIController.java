@@ -1,7 +1,7 @@
 package com.portfolioAPI.portfolioapi.Controller;
 
-import com.portfolioAPI.portfolioapi.Entity.CustomerEntity;
-import com.portfolioAPI.portfolioapi.Service.CustomerDetailsService;
+import com.portfolioAPI.portfolioapi.Entity.UserEntity;
+import com.portfolioAPI.portfolioapi.Service.UserDetailsService;
 import com.portfolioAPI.portfolioapi.Service.PortfolioAPIService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-import java.util.List;
 
 @RestController
 @RequestMapping(path="/api/v1/customer")
@@ -18,36 +17,37 @@ import java.util.List;
 public class PortfolioAPIController {
 
     private final PortfolioAPIService portfolioAPIService;
-    private final CustomerDetailsService customerDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public PortfolioAPIController(PortfolioAPIService portfolioAPIService, CustomerDetailsService customerDetailsService){
+    public PortfolioAPIController(PortfolioAPIService portfolioAPIService, UserDetailsService userDetailsService){
         this.portfolioAPIService = portfolioAPIService;
-        this.customerDetailsService = customerDetailsService;
+        this.userDetailsService = userDetailsService;
     }
 
-    @RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
-    public Iterable<CustomerEntity> getCustomers(){
-        log.debug("Get customers Endpoint hit.");
-        return portfolioAPIService.getCustomers();
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+    public Iterable<UserEntity> getUsers(){
+        log.debug("Get Users" +
+                " Endpoint hit.");
+        return portfolioAPIService.getUsers();
     }
 
-    @RequestMapping(value = "/getCustomer", method = RequestMethod.GET)
-    public CustomerEntity getCustomer(@RequestBody CustomerEntity customerEntity){
-        log.debug("/getCustomer endpoint hit with request body {}", customerEntity.getId());
-        return portfolioAPIService.getCustomer(customerEntity);
+    @RequestMapping(value = "/getUser", method = {RequestMethod.GET, RequestMethod.POST})
+    public UserEntity getUser(@RequestBody UserEntity userEntity){
+        log.debug("/getUser endpoint hit with request body {}", userEntity.getId());
+        return portfolioAPIService.getUser(userEntity.getEmail(), userEntity.getPassword());
     }
 
-    @RequestMapping(value = "/addCustomer", method = { RequestMethod.GET, RequestMethod.POST })
-    public void registerCustomer(
-            @RequestBody CustomerEntity customerEntity){
-        customerDetailsService.postCustomer(customerEntity);
+    @RequestMapping(value = "/addUser", method = { RequestMethod.GET, RequestMethod.POST })
+    public void registerUser(
+            @RequestBody UserEntity userEntity){
+        userDetailsService.postUser(userEntity);
     }
 
-    @RequestMapping(value = "/removeCustomer", method = {RequestMethod.GET, RequestMethod.POST})
-    public void removeCustomer(
-            @RequestBody CustomerEntity customerEntity) {
-        customerDetailsService.removeCustomer(customerEntity);
+    @RequestMapping(value = "/removeUser", method = {RequestMethod.GET, RequestMethod.POST})
+    public void removeUser(
+            @RequestBody UserEntity userEntity) {
+        userDetailsService.removeUser(userEntity);
     }
 
 
