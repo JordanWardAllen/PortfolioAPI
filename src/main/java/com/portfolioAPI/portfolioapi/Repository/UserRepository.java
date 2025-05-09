@@ -4,6 +4,8 @@ import com.portfolioAPI.portfolioapi.Entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 //@Repository
 //public interface UserRepository extends JpaRepository<UserEntity, Long> {
 //
@@ -17,10 +19,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
-    UserEntity findUserById(Long id);
+    Optional<UserEntity> findUserById(Long id);
     UserEntity findUserByEmail(String email);
-    UserEntity findUserByName(String name);
-    UserEntity findUserByEmailAndPassword(String email, String password);
+    Optional<UserEntity> findUserByName(String name);
+    Optional<UserEntity> findUserByEmailAndPassword(String email, String password);
 
 }
 

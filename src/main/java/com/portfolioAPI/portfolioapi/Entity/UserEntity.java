@@ -1,13 +1,13 @@
 package com.portfolioAPI.portfolioapi.Entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+import static jakarta.persistence.GenerationType.*;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Table
@@ -20,31 +20,25 @@ public class UserEntity {
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = SEQUENCE,
             generator = "user_sequence"
     )
-    @Column
     private Long id;
 
-    @Column(
-            name = "name",
-            length = 36
-    )
+
     @NonNull
+    @Column(unique = true)
     private String name;
 
-    @Column(
-            name = "email",
-            length = 50
-    )
+
     @NonNull
+    @Column(unique = true)
     private String email;
 
-    //Encoding to be implemented later
-    @Column(
-            name = "password",
-            length = 16
-    )
     @NonNull
     private String password;
+
+
+    private String alias;
+
 }
