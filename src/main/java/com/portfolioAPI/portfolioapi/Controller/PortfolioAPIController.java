@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping(path = "/api/v1/user")
@@ -24,22 +27,16 @@ public class PortfolioAPIController {
     }
 
     @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public Iterable<UserDTO> getUsers() {
+    public List<UserDTO> getUsers() {
         log.debug("Get Users" +
                 " Endpoint hit.");
         return userService.getUsers();
     }
 
-    @RequestMapping(value = "/getUserById", method = {RequestMethod.GET})
-    public UserDTO getUserById(@RequestParam Long id) {
-        log.debug("/getUserById endpoint hit with request body {}", id);
-        return userService.getUserById(id);
-    }
-
-    @RequestMapping(value = "/getUserByEmailAndPassword", method = {RequestMethod.GET})
-    public UserDTO getUserByEmailAndPassword(@RequestParam String email, String password) {
-        log.debug("/getUserByEmailAndPassword received request params: " + email + " " + password);
-        return userService.getUserEmailAndPassword(email, password);
+    @RequestMapping(value = "/getUserByName", method = {RequestMethod.GET})
+    public UserDTO getUserByName(@RequestParam String name) {
+        log.debug("/findUserByName endpoint hit with request body {}", name);
+        return userService.getUserByName(name);
     }
 
     @RequestMapping(value = "/createUser", method = {RequestMethod.POST})
@@ -57,9 +54,9 @@ public class PortfolioAPIController {
 
     @RequestMapping(value = "/deleteUser", method = {RequestMethod.DELETE})
     public ResponseEntity<String> removeUser(@Valid
-                           @RequestParam Long id) {
-        userService.removeUser(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted User with ID " + id);
+                           @RequestParam String name) {
+        userService.removeUser(name);
+        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted User with name " + name);
     }
 
 }
